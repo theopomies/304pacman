@@ -1,3 +1,8 @@
+mod io;
+use io::PacmanConfig;
+mod pathfinding;
+
 fn main() {
-    println!("Hello, world!");
+    let pacman = PacmanConfig::from_args();
+    println!("{}", pacman);
 }
