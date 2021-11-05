@@ -8,7 +8,7 @@ use std::{
 
 #[derive(Debug)]
 pub struct PacmanConfig {
-    pacmap: PacMap,
+    pub pacmap: PacMap,
     wall_char: char,
     empty_char: char,
 }
