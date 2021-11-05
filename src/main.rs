@@ -1,6 +1,6 @@
 mod io;
 use io::PacmanConfig;
-mod pathfinding;
+mod pacmap;
 
 fn main() {
     let pacman = &mut PacmanConfig::from_args();

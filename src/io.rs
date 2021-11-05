@@ -1,4 +1,4 @@
-use crate::pathfinding::{Cell, PacMap};
+use crate::pacmap::{Cell, PacMap};
 use clap::{clap_app, ErrorKind};
 use std::{
     env,
