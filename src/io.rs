@@ -8,7 +8,7 @@ use std::{
 
 #[derive(Debug)]
 pub struct PacmanConfig {
-    pub pacmap: PacMap,
+    pacmap: PacMap,
     wall_char: char,
     empty_char: char,
 }
@@ -57,6 +57,10 @@ impl PacmanConfig {
             wall_char: args.wall_char,
             empty_char: args.empty_char,
         }
+    }
+
+    pub fn find_paths(&mut self) {
+        self.pacmap.find_paths()
     }
 }
 

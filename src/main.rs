@@ -4,6 +4,6 @@ mod pacmap;
 
 fn main() {
     let pacman = &mut PacmanConfig::from_args();
-    pacman.pacmap.find_paths();
+    pacman.find_paths();
     println!("{}", pacman);
 }
