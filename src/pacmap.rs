@@ -5,7 +5,6 @@ pub struct PacMap {
     pub map: Map,
     ghost_pos: Position,
     stack: Vec<Position>,
-    dimensions: Dimensions,
 }
 
 type Map = Vec<Vec<Cell>>;
@@ -14,12 +13,6 @@ type Map = Vec<Vec<Cell>>;
 struct Position {
     x: usize,
     y: usize,
-}
-
-#[derive(Debug)]
-struct Dimensions {
-    width: usize,
-    height: usize,
 }
 
 #[derive(Debug)]
@@ -58,11 +51,11 @@ impl PacMap {
             .map(|pos| self.visit_neighbour(pos, current_distance))
             .unwrap_or(false)
             || from_pos
-                .east(self.dimensions.width)
+                .east(self.map[0].len())
                 .map(|pos| self.visit_neighbour(pos, current_distance))
                 .unwrap_or(false)
             || from_pos
-                .south(self.dimensions.height)
+                .south(self.map.len())
                 .map(|pos| self.visit_neighbour(pos, current_distance))
                 .unwrap_or(false)
             || from_pos
@@ -181,13 +174,9 @@ impl From<String> for PacMap {
             process::exit(84)
         }
         Self {
-            stack: vec![],
-            ghost_pos: ghost_pos.unwrap(),
-            dimensions: Dimensions {
-                height: map.len(),
-                width: map[0].len(),
-            },
             map,
+            ghost_pos: ghost_pos.unwrap(),
+            stack: vec![],
         }
     }
 }
