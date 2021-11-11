@@ -1,5 +1,5 @@
 mod io;
-use io::PacmanConfig;
+use io::pacman_config::PacmanConfig;
 mod pacmap;
 
 fn main() {

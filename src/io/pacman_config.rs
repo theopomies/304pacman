@@ -1,7 +1,6 @@
+use super::get_args::get_args;
 use crate::pacmap::{Cell, PacMap};
-use clap::{clap_app, ErrorKind};
 use std::{
-    env,
     fmt::{self, Display, Formatter},
     process,
 };
@@ -11,13 +10,6 @@ pub struct PacmanConfig {
     pacmap: PacMap,
     wall_char: char,
     empty_char: char,
-}
-
-#[derive(Debug)]
-struct Arguments {
-    pub map_file: String,
-    pub wall_char: char,
-    pub empty_char: char,
 }
 
 impl Display for PacmanConfig {
@@ -61,34 +53,5 @@ impl PacmanConfig {
 
     pub fn find_paths(&mut self) {
         self.pacmap.find_paths()
-    }
-}
-
-fn get_args() -> Arguments {
-    let args = match clap_app!(pacman =>
-        (@arg file: +required "file describing the board, using the following characters:
-        ‘0’ for an empty square,
-        ‘1’ for a wall,
-        ‘F’ for the ghost’s position,
-        ‘P’ for Pacman’s position.")
-        (@arg c1: +required "character to display for a wall.")
-        (@arg c2: +required "character to display for an empty space.")
-    )
-    .get_matches_from_safe(env::args())
-    {
-        Ok(args) => args,
-        Err(err) => {
-            eprintln!("{}", err.message);
-            match err.kind {
-                ErrorKind::HelpDisplayed => process::exit(0),
-                _ => process::exit(84),
-            }
-        }
-    };
-
-    Arguments {
-        map_file: args.value_of("file").unwrap().to_owned(),
-        wall_char: args.value_of("c1").unwrap().chars().next().unwrap(),
-        empty_char: args.value_of("c2").unwrap().chars().next().unwrap(),
     }
 }
